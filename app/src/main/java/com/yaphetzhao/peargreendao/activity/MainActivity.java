@@ -12,6 +12,10 @@ import com.yaphetzhao.peargreendao.bean.PearNote;
 import com.yaphetzhao.peargreendao.dao.PearNoteDao;
 
 import java.util.Date;
+import java.util.List;
+
+import de.greenrobot.dao.query.Query;
+import de.greenrobot.dao.query.QueryBuilder;
 
 import static com.yaphetzhao.peargreendao.config.Config.TAG;
 
@@ -25,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    // 增 Insert
+    // 增
+    // Insert
     private void insertDB() {
         if (null == cursor) {
             createCursor();
@@ -42,13 +47,33 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // 删 delete
+    // 删
+    // delete
     private void deleteDB(long id) {
         getPearNoteDao().deleteAll();
         getPearNoteDao().deleteByKey(id);
         getPearNoteDao().delete(new PearNote());
         getPearNoteDao().deleteByKeyInTx((long) 1, (long) 2);
         getCursor().requery();
+    }
+
+    // 改:同增
+    // update:like insert
+
+    // 查
+    // search
+    private void search() {
+        String noteKey = String.valueOf("key" + System.currentTimeMillis());
+
+        Query query = getPearNoteDao().queryBuilder()
+                .where(PearNoteDao.Properties.Key.eq(noteKey))
+                .orderAsc(PearNoteDao.Properties.Createtime)
+                .build();
+        List notes = query.list();
+        Log.i("YaphetZhao-notes.size:", String.valueOf(notes.size()));
+
+        QueryBuilder.LOG_SQL = true;
+        QueryBuilder.LOG_VALUES = true;
     }
 
     private Cursor getCursor() {
