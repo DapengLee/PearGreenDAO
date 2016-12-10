@@ -1,1 +1,1 @@
-include ':app', ':peardaogenerator'
+include ':app', ':peardaogenerator', ':peardaoutil'
