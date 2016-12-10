@@ -32,49 +32,49 @@ public class PearDBUtil {
         return pearDBUtil;
     }
 
-    private void insert(String key, String value) {
+    public void insert(String key, String value) {
         PearNote note = new PearNote(null, key, value, new Date());
         getPearNoteDao().insert(note);
         getCursor().requery();
     }
 
-    private void insert(PearNote pearNote) {
+    public void insert(PearNote pearNote) {
         getPearNoteDao().insert(pearNote);
         getCursor().requery();
     }
 
-    private void delete(long id) {
+    public void delete(long id) {
         getPearNoteDao().deleteByKey(id);
         getCursor().requery();
     }
 
-    private void delete(PearNote pearNote) {
+    public void delete(PearNote pearNote) {
         getPearNoteDao().delete(pearNote);
         getCursor().requery();
     }
 
-    private void delete(Long... longs) {
+    public void delete(Long... longs) {
         getPearNoteDao().deleteByKeyInTx(longs);
         getCursor().requery();
     }
 
-    private void deleteAll() {
+    public void deleteAll() {
         getPearNoteDao().deleteAll();
         getCursor().requery();
     }
 
-    private void update(String key, String value) {
+    public void update(String key, String value) {
         PearNote note = new PearNote(null, key, value, new Date());
         getPearNoteDao().insert(note);
         getCursor().requery();
     }
 
-    private void update(PearNote pearNote) {
+    public void update(PearNote pearNote) {
         getPearNoteDao().insert(pearNote);
         getCursor().requery();
     }
 
-    private List search(long id) {
+    public List search(long id) {
         Query query = getPearNoteDao().queryBuilder()
                 .where(PearNoteDao.Properties.Id.eq(id))
                 .orderAsc(PearNoteDao.Properties.PearNoteDAO)
@@ -85,7 +85,7 @@ public class PearDBUtil {
         return notes;
     }
 
-    private List search(String key) {
+    public List search(String key) {
         Query query = getPearNoteDao().queryBuilder()
                 .where(PearNoteDao.Properties.Key.eq(key))
                 .orderAsc(PearNoteDao.Properties.PearNoteDAO)
@@ -96,7 +96,7 @@ public class PearDBUtil {
         return notes;
     }
 
-    private List search(StringBuffer value) {
+    public List search(StringBuffer value) {
         Query query = getPearNoteDao().queryBuilder()
                 .where(PearNoteDao.Properties.Value.eq(String.valueOf(value)))
                 .orderAsc(PearNoteDao.Properties.PearNoteDAO)
@@ -107,7 +107,7 @@ public class PearDBUtil {
         return notes;
     }
 
-    private List search(PearNoteDao pearNoteDao) {
+    public List search(PearNoteDao pearNoteDao) {
         Query query = getPearNoteDao().queryBuilder()
                 .where(PearNoteDao.Properties.PearNoteDAO.eq(pearNoteDao))
                 .orderAsc(PearNoteDao.Properties.PearNoteDAO)
