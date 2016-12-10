@@ -1,4 +1,4 @@
-package com.yaphetzhao.peargreendao.dbutil;
+package com.yaphetzhao.peargreendao.util;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,8 +17,7 @@ import de.greenrobot.dao.query.QueryBuilder;
  * Created by YaphetZhao
  * on 2016/12/10.
  */
-
-@SuppressWarnings("ALL")
+@SuppressWarnings("unused")
 public class PearDBUtil {
 
     private static PearDBUtil pearDBUtil;
@@ -63,14 +62,18 @@ public class PearDBUtil {
         getCursor().requery();
     }
 
-    public void update(String key, String value) {
-        PearNote note = new PearNote(null, key, value, new Date());
-        getPearNoteDao().insert(note);
+    public void update(PearNote pearNote) {
+        getPearNoteDao().update(pearNote);
         getCursor().requery();
     }
 
-    public void update(PearNote pearNote) {
-        getPearNoteDao().insert(pearNote);
+    public void update(PearNote... pearNotes) {
+        getPearNoteDao().updateInTx(pearNotes);
+        getCursor().requery();
+    }
+
+    public void update(Iterable<PearNote> iterable) {
+        getPearNoteDao().updateInTx(iterable);
         getCursor().requery();
     }
 
@@ -111,6 +114,15 @@ public class PearDBUtil {
         Query query = getPearNoteDao().queryBuilder()
                 .where(PearNoteDao.Properties.PearNoteDAO.eq(pearNoteDao))
                 .orderAsc(PearNoteDao.Properties.PearNoteDAO)
+                .build();
+        List notes = query.list();
+        QueryBuilder.LOG_SQL = true;
+        QueryBuilder.LOG_VALUES = true;
+        return notes;
+    }
+
+    public List searchAll() {
+        Query query = getPearNoteDao().queryBuilder()
                 .build();
         List notes = query.list();
         QueryBuilder.LOG_SQL = true;
