@@ -33,7 +33,6 @@ public class PearDaoGenerator {
         entity.addIdProperty();//主键
         entity.addStringProperty("key").notNull();
         entity.addStringProperty("value");
-        entity.addStringProperty("createtime");
         entity.addDateProperty("PearNoteDAO");
     }
 

@@ -10,7 +10,6 @@ public class PearNote {
     /** Not-null value. */
     private String key;
     private String value;
-    private String createtime;
     private java.util.Date PearNoteDAO;
 
     public PearNote() {
@@ -20,11 +19,10 @@ public class PearNote {
         this.id = id;
     }
 
-    public PearNote(Long id, String key, String value, String createtime, java.util.Date PearNoteDAO) {
+    public PearNote(Long id, String key, String value, java.util.Date PearNoteDAO) {
         this.id = id;
         this.key = key;
         this.value = value;
-        this.createtime = createtime;
         this.PearNoteDAO = PearNoteDAO;
     }
 
@@ -52,14 +50,6 @@ public class PearNote {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public String getCreatetime() {
-        return createtime;
-    }
-
-    public void setCreatetime(String createtime) {
-        this.createtime = createtime;
     }
 
     public java.util.Date getPearNoteDAO() {

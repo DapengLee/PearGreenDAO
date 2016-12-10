@@ -26,8 +26,7 @@ public class PearNoteDao extends AbstractDao<PearNote, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Key = new Property(1, String.class, "key", false, "KEY");
         public final static Property Value = new Property(2, String.class, "value", false, "VALUE");
-        public final static Property Createtime = new Property(3, String.class, "createtime", false, "CREATETIME");
-        public final static Property PearNoteDAO = new Property(4, java.util.Date.class, "PearNoteDAO", false, "PEAR_NOTE_DAO");
+        public final static Property PearNoteDAO = new Property(3, java.util.Date.class, "PearNoteDAO", false, "PEAR_NOTE_DAO");
     };
 
 
@@ -46,8 +45,7 @@ public class PearNoteDao extends AbstractDao<PearNote, Long> {
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"KEY\" TEXT NOT NULL ," + // 1: key
                 "\"VALUE\" TEXT," + // 2: value
-                "\"CREATETIME\" TEXT," + // 3: createtime
-                "\"PEAR_NOTE_DAO\" INTEGER);"); // 4: PearNoteDAO
+                "\"PEAR_NOTE_DAO\" INTEGER);"); // 3: PearNoteDAO
     }
 
     /** Drops the underlying database table. */
@@ -72,14 +70,9 @@ public class PearNoteDao extends AbstractDao<PearNote, Long> {
             stmt.bindString(3, value);
         }
  
-        String createtime = entity.getCreatetime();
-        if (createtime != null) {
-            stmt.bindString(4, createtime);
-        }
- 
         java.util.Date PearNoteDAO = entity.getPearNoteDAO();
         if (PearNoteDAO != null) {
-            stmt.bindLong(5, PearNoteDAO.getTime());
+            stmt.bindLong(4, PearNoteDAO.getTime());
         }
     }
 
@@ -96,8 +89,7 @@ public class PearNoteDao extends AbstractDao<PearNote, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // key
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // value
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // createtime
-            cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)) // PearNoteDAO
+            cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)) // PearNoteDAO
         );
         return entity;
     }
@@ -108,8 +100,7 @@ public class PearNoteDao extends AbstractDao<PearNote, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setKey(cursor.getString(offset + 1));
         entity.setValue(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setCreatetime(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setPearNoteDAO(cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)));
+        entity.setPearNoteDAO(cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)));
      }
     
     /** @inheritdoc */

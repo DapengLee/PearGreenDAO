@@ -38,9 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         String noteKey = String.valueOf("key" + System.currentTimeMillis());
         String noteValue = String.valueOf("Value" + System.currentTimeMillis());
-        String noteCreateTime = String.valueOf("CreateTIme" + System.currentTimeMillis());
 
-        PearNote note = new PearNote(null, noteKey, noteValue, noteCreateTime, new Date());
+        PearNote note = new PearNote(null, noteKey, noteValue, new Date());
         getPearNoteDao().insert(note);
         Log.d(TAG, "Inserted new note, ID: " + note.getId());
         getCursor().requery();
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         Query query = getPearNoteDao().queryBuilder()
                 .where(PearNoteDao.Properties.Key.eq(noteKey))
-                .orderAsc(PearNoteDao.Properties.Createtime)
+                .orderAsc(PearNoteDao.Properties.PearNoteDAO)
                 .build();
         List notes = query.list();
         Log.i("YaphetZhao-notes.size:", String.valueOf(notes.size()));
