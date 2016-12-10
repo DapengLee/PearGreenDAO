@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PearGreenDAO</string>
+    <string name="delete">Delete</string>
+    <string name="search">Search</string>
+    <string name="searchall">searchAll</string>
+    <string name="insert">Insert</string>
+    <string name="key">key</string>
+    <string name="value">value</string>
+    <string name="key_value">key/value</string>
 </resources>

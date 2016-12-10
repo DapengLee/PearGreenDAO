@@ -16,6 +16,8 @@ import static com.yaphetzhao.peargreendao.config.Config.DB_NAME;
 @SuppressWarnings("FieldCanBeLocal")
 public class BaseApplication extends Application {
 
+    private static BaseApplication instance;
+
     private DaoMaster.DevOpenHelper dbHelper;
     private SQLiteDatabase sqlDB;
     private DaoMaster daoMaster;
@@ -24,7 +26,12 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         createDataBase();
+    }
+
+    public static BaseApplication getInstance() {
+        return instance;
     }
 
     private void createDataBase() {
